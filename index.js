@@ -1,7 +1,9 @@
 const express = require("express");
 const { v4: uuid } = require("uuid");
+const cors = require('cors');
 
 app = express();
+app.use(cors())
 app.use(express.json());
 
 const todos = [];
@@ -28,6 +30,7 @@ app.post('/todos', (request, response) => {
         name: body.name,
         created_at: new Date(),
         updated_at: new Date(),
+        done: false,
     };
 
 
@@ -49,6 +52,7 @@ app.put('/todos/:id', (request, response) => {
     const updatedTodo = {
         ...todos[index],
         name: body.name,
+        done: body.done,
         updated_at: new Date(),
     };
 
